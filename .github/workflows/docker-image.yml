@@ -8,8 +8,8 @@ on:
       - v*
 
 env:
-  APP_NAME: ichatgpt
-  DOCKERHUB_REPO: ichatgpt-frontend
+  APP_NAME: ichatgptweb
+  DOCKERHUB_REPO: westman/ichatgpt-frontend
 
 jobs:
   docker:
@@ -34,7 +34,7 @@ jobs:
         name: Generate App Version
         run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
       -
-        name: Build and push 
+        name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -49,4 +49,3 @@ jobs:
           tags: |
             ${{ env.DOCKERHUB_REPO }}:latest
             ${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
-
