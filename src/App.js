@@ -21,7 +21,7 @@ function App() {
       if (questions.length === 0) {
         return;
       }
-      let response = await fetch(`http://chatgpt.021d.com/:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`); 
+      let response = await fetch(`http://chatgpt.021d.com:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`); 
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);  
