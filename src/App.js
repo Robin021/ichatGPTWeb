@@ -21,7 +21,7 @@ function App() {
       if (questions.length === 0) {
         return;
       }
-      let response = await fetch(`http://backend:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`); 
+      let response = await fetch(`http://chatgpt.021d.com/:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`); 
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);  
@@ -32,7 +32,7 @@ function App() {
   }, [questions]);
   useEffect(() => {
     const getNewConversationId = async () => {
-      let response = await fetch(`http://backend:5001/new-conversation`);
+      let response = await fetch(`http://chatgpt.021d.com:5001/new-conversation`);
       response = await response.json();
       const id = response.id;
       setConversationId(id); 
