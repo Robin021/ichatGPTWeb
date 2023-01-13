@@ -55,3 +55,11 @@ input[type="submit"] {
 color: green;
 background-color: lightgrey;
 }
+.ant-space,.ant-space-item {
+  width: 100% !important;
+}
+.alert-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
