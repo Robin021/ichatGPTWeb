@@ -2,64 +2,91 @@ html, body, * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body  {
   background-color: #222;
   padding: 20px;
-}
-
-.question-form {
-  width: 95%;
-  position: absolute;
-  bottom: 20px;
-  display: flex;
-}
-
-.question-form input[type="text"] {
-  width: 90%;
-  height: 50px;
-  border: none;
-  padding: 15px;
-  font-size: 1.2rem;
-  background-color: #8e8ea0;
-}
-
-input[type="submit"] {
-  height: 50px;
-  border: none;
-  width: 10%;
+  font-family: Porsche Next;
 }
 
 .container {
   background-color: black;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+
 }
 
 .answer-area {
   background: #343541;
-    min-height: 70vh;
-    padding: 15px;
-    color: white;
-    font-family: roboto;
-    white-space: pre-wrap;
-    overflow-y: auto;
-    max-height: 200px;
-    
+  color: white;
+  max-width: 98%;
+  /* display: flex; */
+  flex-direction: column;
+  overflow-y: scroll; 
+  height: 88%;
+  overflow: auto;
+  flex-wrap: wrap;
+
+
+}
+@media only screen and (min-width: 600px) {
+  .answer-area {
+      width: 98%;
+      /* margin: 0 auto; */
+      overflow-y: scroll; 
+  }
 }
 .answer-area .question {
-  color: blue;
-  background-color: lightyellow;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  color: #333;
+  text-align: right;
+  float: right;
+  flex-wrap: wrap;
   }
   
 .answer-area .answer {
-color: green;
-background-color: lightgrey;
+  background-color: #e6f7ff;
+  padding: 100px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 10px;
+  color: #333;
+  float: left;
+  flex-wrap: wrap;
 }
+.answer-area .question, .answer-area .answer {
+  display: inline-block;
+  word-break: break-all;
+  margin:8px 0 ;
+  width: 51%;
+  flex-wrap: wrap;
+  flex-basis: auto;
+
+}
+
 .ant-space,.ant-space-item {
   width: 100% !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.ant-spin {
+  z-index: 9999;
+  position: fixed;
+  bottom: 45px;
 }
 .alert-container {
   display: flex;
+  /* z-index: 9999; */
+  color: #f7f7f7;
   justify-content: center;
   align-items: center;
+
 }

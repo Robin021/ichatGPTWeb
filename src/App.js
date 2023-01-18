@@ -1,11 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Button } from 'antd';
-import { AliwangwangOutlined } from '@ant-design/icons';
-import { Alert } from 'antd';
-import { Input, Space } from 'antd';
-
+import { WechatOutlined } from '@ant-design/icons';
+import { Input, Space,Spin,Button,Watermark } from 'antd';
+const Nls = require('alibabacloud-nls')
+//Nls内部含SpeechRecognition, SpeechTranscription, SpeechSynthesizer
+//以下为使用import导入SDK
+//import { SpeechRecognition } from "alibabacloud-nls"
+//import { SpeechTranscription } from "alibabacloud-nls"
+//import { SpeechSynthesizer } from "alibabacloud-nls"
 
 function App() {
   const [error, setError] = useState(false);
@@ -18,41 +21,42 @@ function App() {
   const { Search } = Input;
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
   const suffix = (
-    <AliwangwangOutlined
+    <WechatOutlined
       style={{
         fontSize: 16,
         color: '#1890ff',
       }}
     />
   );
+
   const handleSubmit = (e) => {
     setQuestions([...questions, e]);
-    // console.log(e)
     setSearchValue('');
     setIsLoading(true);
-  };
+    setPrevAnswer(prevAnswer + '<div class="question">' + e + '</div>');
+  }
+  
   const getAnswer = async () => {
     if (questions.length === 0) {
       return;
     }
     try {
       setIsLoading(true);
-      let response = await fetch(`http://chatgpt.021d.com:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`);
+      let response = await fetch(`http://127.0.0.1:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`);
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);
-      setPrevAnswer(prevAnswer + '\n你: ' + questions[0] + '\n\nChatBot:' + response.answers + '\n');
+      setPrevAnswer(prevAnswer + '<div class="answer">' + response.answers + '</div>');
       setError(false);
       setIsLoading(false);
-
     } catch (e) {
       setError(true);
       setIsLoading(false);
     }
   }
-
+  
+  
   useEffect(() => {
     getAnswer();
   }, [questions]);
@@ -63,7 +67,7 @@ function App() {
   useEffect(() => {
     const getNewConversationId = async () => {
       try {
-        let response = await fetch(`http://chatgpt.021d.com:5001/new-conversation`);
+        let response = await fetch(`http://127.0.0.1:5001/new-conversation`);
         response = await response.json();
         const id = response.id;
         setConversationId(id);
@@ -78,17 +82,17 @@ function App() {
   }, [prevAnswer]);
 
   return (
-
+    <Watermark content="">
+    {connectionError && <div className="error-message">没有连上大脑，请刷下再产生会话</div>}
     <div className='container'>
-      {connectionError && <div className="error-message">没有连上大脑，请刷下再产生会话</div>}
-      <pre className='answer-area'>
-        {prevAnswer}
-        <br />
-      </pre>
+      <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />
+      </div>
+
       <Space direction="vertical">
-        <div className='alert-container'>
-          {isLoading && <Alert message="等待回复中..." type="info" />}
-        </div>
+      <div className='alert-container'>
+          {isLoading && <Spin />}
+          {/* {isLoading && "正在获取答案"} */}
+      </div>
         <Search
           placeholder="跟我聊两句吧"
           enterButton="Send"
@@ -100,11 +104,9 @@ function App() {
           onChange={e => setSearchValue(e.target.value)}
         />
       </Space>
-      {/* <Alert message="消息已发送" type="success" /> */}
-      {isLoading && <div>等待回复中...</div>}
-      {error && <Button color="danger" onClick={() => getAnswer()}>重新产生回答</Button>}
-    </div>
+      {error && <Button color="danger" onClick={() => handleSubmit()}>重新产生回答</Button>}
 
+    </Watermark>
   );
 }
 
