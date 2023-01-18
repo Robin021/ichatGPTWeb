@@ -21,6 +21,7 @@ function App() {
   const { Search } = Input;
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const DOMAIN = process.env.REACT_APP_DOMAIN; 
   const suffix = (
     <WechatOutlined
       style={{
@@ -43,7 +44,7 @@ function App() {
     }
     try {
       setIsLoading(true);
-      let response = await fetch(`http://127.0.0.1:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`);
+      let response = await fetch(`http://${DOMAIN}:5001/ask?q=${questions[0]}&conversation_id=${conversationId}`);
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);
@@ -67,7 +68,7 @@ function App() {
   useEffect(() => {
     const getNewConversationId = async () => {
       try {
-        let response = await fetch(`http://127.0.0.1:5001/new-conversation`);
+        let response = await fetch(`http://${DOMAIN}:5001/new-conversation`);
         response = await response.json();
         const id = response.id;
         setConversationId(id);
