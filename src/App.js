@@ -85,7 +85,7 @@ function App() {
 
   return (
     <Watermark content="">
-    {connectionError && <div className="error-message">没有连上大脑，请刷下再产生会话</div>}
+    {connectionError && <div className="alert-container">没有连上大脑，请刷下再产生会话</div>}
    
     <div className='container'>
     <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />
