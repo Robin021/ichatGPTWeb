@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
-import { WechatOutlined } from '@ant-design/icons';
+import { WechatOutlined ,LoadingOutlined} from '@ant-design/icons';
 import { Input, Space,Spin,Button,Watermark } from 'antd';
 const Nls = require('alibabacloud-nls')
 //Nls内部含SpeechRecognition, SpeechTranscription, SpeechSynthesizer
@@ -26,16 +26,17 @@ function App() {
     <WechatOutlined
       style={{
         fontSize: 16,
-        color: '#1890ff',
+        color: '#2a2a2A',
       }}
     />
   );
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   const handleSubmit = (e) => {
     setQuestions([...questions, e]);
     setSearchValue('');
     setIsLoading(true);
-    setPrevAnswer(prevAnswer + '<div class="question">' + e + '</div>');
+    setPrevAnswer(prevAnswer + '<div class="question"><div class="question-text">' + e + '</div></div>');
   }
   
   const getAnswer = async () => {
@@ -48,7 +49,7 @@ function App() {
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);
-      setPrevAnswer(prevAnswer + '<div class="answer">' + response.answers + '</div>');
+      setPrevAnswer(prevAnswer + '<div class="answer"><div class="answer-text">' + response.answers + '</div></div>');
       setError(false);
       setIsLoading(false);
     } catch (e) {
@@ -85,14 +86,14 @@ function App() {
   return (
     <Watermark content="">
     {connectionError && <div className="error-message">没有连上大脑，请刷下再产生会话</div>}
+   
     <div className='container'>
-      <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />
+    <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />
       </div>
 
       <Space direction="vertical">
       <div className='alert-container'>
-          {isLoading && <Spin />}
-          {/* {isLoading && "正在获取答案"} */}
+          {isLoading && <Spin indicator={antIcon}/>}
       </div>
         <Search
           placeholder="跟我聊两句吧"

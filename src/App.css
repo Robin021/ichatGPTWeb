@@ -6,77 +6,94 @@ html, body, * {
 }
 
 body  {
-  background-color: #222;
+  background-color: #2c2c2c;
   padding: 20px;
   font-family: Porsche Next;
 }
 
 .container {
-  background-color: black;
+  /* background-color: black; */
   display: flex;
   justify-content: center;
   height: 100vh;
 
 }
-
+  
 .answer-area {
-  background: #343541;
+  background: #191919;
   color: white;
-  max-width: 98%;
-  /* display: flex; */
+  /* max-width: 98%; */
+  display: flex;
   flex-direction: column;
   overflow-y: scroll; 
   height: 88%;
   overflow: auto;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+  width: 98%;
+  border-radius: 10px;
+  border: 1px solid #191919;
 
 
 }
 @media only screen and (min-width: 600px) {
   .answer-area {
       width: 98%;
-      /* margin: 0 auto; */
       overflow-y: scroll; 
   }
-}
-.answer-area .question {
-  background-color: #f7f7f7;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  color: #333;
-  text-align: right;
-  float: right;
-  flex-wrap: wrap;
-  }
-  
-.answer-area .answer {
-  background-color: #e6f7ff;
-  padding: 100px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-  padding: 10px;
-  color: #333;
-  float: left;
-  flex-wrap: wrap;
 }
 .answer-area .question, .answer-area .answer {
   display: inline-block;
   word-break: break-all;
-  margin:8px 0 ;
-  width: 51%;
+  width: 100%;
   flex-wrap: wrap;
-  flex-basis: auto;
-
+  color: #333;
+}
+.answer-area .question {
+  flex-wrap: wrap;
+  }
+  
+.answer-area .answer {
+  margin:8px 0 ;
+  flex-wrap: wrap;
+}
+.answer-area .question .question-text, .answer-area .answer .answer-text {
+  display: inline-block;
+  word-break: break-all;
+  margin:8px 20px ;
+  flex-wrap: wrap;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #2c2c2c;
+  color: #ffffff;
+  text-align: left;
+}
+.answer-area .question .question-text {
+  background-color: #28b561;
+  margin-left: 20%;
+  color: #2c2c2c;
+  float: right;
+  }
+  
+.answer-area .answer .answer-text{
+  background-color: #2c2c2c;
+  margin-right: 20%;
+  float: left;
+  color: #ffffff;
 }
 
 .ant-space,.ant-space-item {
   width: 100% !important;
+  color: #191919;
   position: fixed;
   bottom: 0;
   left: 0;
 }
+.ant-btn-primary{
+
+  color: #fff;
+  background: #28b561;
+  border-color: #28b561 ;
+  }
 .ant-spin {
   z-index: 9999;
   position: fixed;
