@@ -82,13 +82,13 @@ body  {
 }
 
 .ant-space,.ant-space-item {
-  width: 80% !important;
-  min-height: 2%;
+  width: 98% !important;
+  min-height: 80px;
   color: #191919;
   position: fixed;
-  bottom: 35px;
-  margin-bottom: 2%;
-  margin-left: 6%;
+  bottom: 0;
+  /* margin-bottom: 2%;
+  margin-left: 6%; */
 }
 .ant-btn-primary{
 
@@ -99,7 +99,7 @@ body  {
 .ant-spin {
   z-index: 9999;
   position: fixed;
-  bottom: 65px;
+  bottom: 85px;
 }
 .alert-container {
   display: flex;
