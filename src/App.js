@@ -4,11 +4,7 @@ import './App.css';
 import { WechatOutlined ,LoadingOutlined} from '@ant-design/icons';
 import { Input, Space,Spin,Button,Watermark } from 'antd';
 const Nls = require('alibabacloud-nls')
-//Nls内部含SpeechRecognition, SpeechTranscription, SpeechSynthesizer
-//以下为使用import导入SDK
-//import { SpeechRecognition } from "alibabacloud-nls"
-//import { SpeechTranscription } from "alibabacloud-nls"
-//import { SpeechSynthesizer } from "alibabacloud-nls"
+
 
 function App() {
   const [error, setError] = useState(false);
