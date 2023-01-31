@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import './App.css';
 import { WechatOutlined ,LoadingOutlined} from '@ant-design/icons';
-import { Input, Space,Spin,Button,Watermark } from 'antd';
+import { Input, Space,Spin,Button,Watermark,message } from 'antd';
 const Nls = require('alibabacloud-nls')
 
 
@@ -17,7 +17,9 @@ function App() {
   const { Search } = Input;
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const DOMAIN = process.env.REACT_APP_DOMAIN; 
+  const DOMAIN = process.env.REACT_APP_DOMAIN;
+  const [messageApi, contextHolder] = message.useMessage();
+   
   const suffix = (
     <WechatOutlined
       style={{
@@ -50,6 +52,12 @@ function App() {
       setIsLoading(false);
     } catch (e) {
       setError(true);
+      messageApi.open({
+        type: 'info',
+        content: '请重新发送',
+        maxCount: 1,
+        duration: 2
+      });
       setIsLoading(false);
     }
   }
@@ -81,16 +89,13 @@ function App() {
 
   return (
     <Watermark content="">
-    {connectionError && <div className="alert-container">没有连上大脑，请刷下再产生会话</div>}
-   
+      {contextHolder}
     <div className='container'>
-    <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />
-      </div>
-
-      <Space direction="vertical">
-      <div className='alert-container'>
-          {isLoading && <Spin indicator={antIcon}/>}
-      </div>
+      <div className="answer-area" dangerouslySetInnerHTML={{__html: prevAnswer}} />  
+      <Space direction="vertical">    
+        <div className='alert-container'>    
+          {isLoading && <Spin indicator={antIcon}/>} 
+        </div> 
         <Search
           placeholder="跟我聊两句吧"
           enterButton="Send"
@@ -100,10 +105,9 @@ function App() {
           onSearch={handleSubmit}
           value={searchValue}
           onChange={e => setSearchValue(e.target.value)}
-        />
+          />
       </Space>
-      {error && <Button color="danger" onClick={() => handleSubmit()}>重新产生回答</Button>}
-
+      </div>
     </Watermark>
   );
 }
