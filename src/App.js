@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { WechatOutlined ,LoadingOutlined} from '@ant-design/icons';
 import { Input, Space,Spin,Button,Watermark,message } from 'antd';
-const Nls = require('alibabacloud-nls')
+
 
 
 function App() {
