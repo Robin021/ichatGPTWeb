@@ -9,7 +9,8 @@ html, body, div {
 }
 
 html {
-  min-height: 700px;
+  min-width: 250px;
+  min-height: 300px;
 }
 
 body  {
