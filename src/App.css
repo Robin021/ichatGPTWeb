@@ -91,6 +91,7 @@ body  {
   margin-right: 20%;
   float: left;
   color: #ffffff;
+  height: auto;
 }
 .ant-space {
   display: flex;
