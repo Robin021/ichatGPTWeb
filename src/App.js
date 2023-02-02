@@ -40,7 +40,7 @@ function App() {
     }
     try {
       setIsLoading(true);
-      let response = await fetch(`http://${DOMAIN}:5001/chat?q=${questions[0]}`);
+      let response = await fetch(`${DOMAIN}/chat?q=${questions[0]}`);
       response = await response.json();
       setAnswers([...answers, response.answers]);
       setQuestions([]);
