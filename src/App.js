@@ -16,7 +16,7 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const DOMAIN = process.env.REACT_APP_DOMAIN;
+  // const DOMAIN = process.env.REACT_APP_DOMAIN;
   const suffix = (
     <WechatOutlined
       style={{
@@ -51,14 +51,20 @@ function App() {
       // setError(true);
       messageApi.open({
         type: 'info',
-        content: '大脑连接错误，请重试',
+        content: '重置会话请输入:  !reset',
         maxCount: 1,
         duration: 2
       });
       setIsLoading(false);
     }
   }
-  
+  useEffect(() => {
+    const getNewConversationId = async () => {
+      let response = await fetch(`/chat?q="!reset"`);
+      response = await response.json();
+    };
+    getNewConversationId();
+  }, []);
   
   useEffect(() => {
     getAnswer();
