@@ -7,7 +7,7 @@ module.exports = function (app) {
             // 👇️ make sure to update your target
             // target: 'http://127.0.0.1:5001',
             // for docker-compose plase use below
-            target: 'http://backend:5001',
+            target: 'http://backend',
             headers: {
                 "Connection": "keep-alive"
             },
